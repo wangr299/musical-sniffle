@@ -1,0 +1,58 @@
+<div class="container">
+	<div class="light" id="light1"></div>
+	<div class="light" id="light2"></div>
+	<div class="light" id="light3"></div>
+	<div class="light" id="light4"></div>
+	<div class="light" id="light5"></div>
+	<div class="light" id="light6"></div>
+	<div class="light" id="light7"></div>
+</div>
+<button id="startBtn">启动</button>
+<button id="stopBtn">停止</button>
+
+<style>
+	.container {
+		display: flex;
+		justify-content: space-around;
+		margin: 50px auto;
+		width: 80%;
+	}
+
+	.light {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		/* 圆形灯 */
+		margin: 10px;
+		opacity: 0.8;
+		box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+	}
+</style>
+
+<script>
+	const colors = [
+		'red', 'orange', 'yellow', 'green',
+		'blue', 'indigo', 'violet'
+	];
+	let animationInterval;
+
+	function startAnimation() {
+		let counter = 0;
+		animationInterval = setInterval(() => {
+			const lights = document.querySelectorAll('.light');
+			lights.forEach((light, index) => {
+				// 每个灯分配不同的颜色
+				const colorIndex = (counter + index) % 7;
+				light.style.backgroundColor = colors[colorIndex];
+			});
+			counter++;
+		}, 300);
+	}
+
+	function stopAnimation() {
+		clearInterval(animationInterval);
+	}
+
+	document.getElementById('startBtn').addEventListener('click', startAnimation);
+	document.getElementById('stopBtn').addEventListener('click', stopAnimation);
+</script>
